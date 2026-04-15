@@ -1,4 +1,4 @@
-### Gestión del Proyecto
+### docs/project-management.md
 Herramienta Utilizada
 Para la organización y seguimiento del desarrollo de "Top 5 de Todo", se ha utilizado un tablero Kanban en Trello (enlace disponible en el README principal).
 
