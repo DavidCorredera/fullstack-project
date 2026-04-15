@@ -58,6 +58,24 @@ export const ListDetail = () => {
     }
   };
 
+  // Función para copiar el Top 5 con formato para redes sociales
+  const handleShare = async () => {
+    try {
+      const text = `🏆 Mi Top 5: ${list.title} (${list.category})\n\n` +
+        list.items.map((item, index) => {
+          const medals = ['🥇', '🥈', '🥉', '4️⃣', '5️⃣'];
+          return `${medals[index]} ${item.title}`;
+        }).join('\n') +
+        `\n\n¿Cuál es el tuyo? Crea tus listas en Top 5 de Todo 🚀`;
+        
+      await navigator.clipboard.writeText(text);
+      alert('¡Copiado al portapapeles! Listo para pegar en tus redes.');
+    } catch (err) {
+      console.error('Error al copiar:', err);
+      alert('Hubo un problema al copiar el texto.');
+    }
+  };
+
   return (
     <div className="max-w-2xl mx-auto space-y-8">
       {/* Cabecera de la lista */}
@@ -67,19 +85,29 @@ export const ListDetail = () => {
         </Link>
         <div className="flex justify-between items-start">
           <div>
-            <span className="text-xs font-semibold text-indigo-600 uppercase tracking-wider bg-indigo-50 px-2 py-1 rounded">
+            <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">
               {list.category}
             </span>
-            <h1 className="text-3xl font-bold mt-2 text-gray-900">{list.title}</h1>
+            <h1 className="text-4xl font-black mt-3 text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+              {list.title}
+            </h1>
           </div>
-          <button 
-            onClick={handleDeleteList}
-            className="text-red-500 hover:bg-red-50 px-3 py-1 rounded transition-colors text-sm font-medium"
-          >
-            Borrar Lista
-          </button>
+          <div className="flex gap-2">
+            <button 
+              onClick={handleShare}
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg transition-all font-medium flex items-center gap-2 shadow-sm hover:shadow"
+            >
+              <span>🔗</span> Compartir
+            </button>
+            <button 
+              onClick={handleDeleteList}
+              className="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg transition-colors font-medium border border-transparent hover:border-red-100"
+            >
+              Borrar
+            </button>
+          </div>
         </div>
-      </div>
+    </div>
 
       {/* Los Elementos del Top 5 */}
       <div className="space-y-3">
@@ -89,17 +117,20 @@ export const ListDetail = () => {
           <p className="text-gray-500 italic py-4">Aún no has añadido nada a este Top 5.</p>
         ) : (
           list.items.map((item, index) => (
-            <div key={item.id} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex gap-4 items-center group">
-              <div className="text-3xl font-black text-indigo-200 w-8 text-center">
+            <div 
+              key={item.id} 
+              className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex gap-4 items-center group hover:shadow-md hover:border-indigo-200 transition-all transform hover:-translate-y-1"
+            >
+              <div className="text-4xl font-black text-indigo-100 w-10 text-center drop-shadow-sm group-hover:text-indigo-200 transition-colors">
                 {index + 1}
               </div>
               <div className="flex-1">
-                <h3 className="font-bold text-gray-800 text-lg">{item.title}</h3>
-                {item.description && <p className="text-gray-600 text-sm">{item.description}</p>}
+                <h3 className="font-bold text-gray-800 text-xl">{item.title}</h3>
+                {item.description && <p className="text-gray-500 text-sm mt-1">{item.description}</p>}
               </div>
               <button 
                 onClick={() => deleteItemFromList(list.id, item.id)}
-                className="text-gray-400 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                className="bg-red-50 text-red-500 p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all hover:bg-red-100 hover:scale-110"
                 title="Quitar del Top 5"
               >
                 🗑️

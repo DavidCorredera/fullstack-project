@@ -8,6 +8,7 @@ export interface ListContextType {
   deleteList: (id: string) => void;
   addItemToList: (listId: string, item: Omit<Item, 'id'>) => { success: boolean; error?: string };
   deleteItemFromList: (listId: string, itemId: string) => void;
+  editItemInList: (listId: string, itemId: string, newTitle: string, newDescription?: string) => void;
 }
 
 export const ListContext = createContext<ListContextType | undefined>(undefined);

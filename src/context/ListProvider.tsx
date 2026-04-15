@@ -66,13 +66,31 @@ export const ListProvider = ({ children }: { children: ReactNode }) => {
     }));
   }, [setLists]);
 
+  // Nueva función para editar
+  const editItemInList = useCallback((listId: string, itemId: string, newTitle: string, newDescription?: string) => {
+    setLists((prevLists) => prevLists.map((list) => {
+      if (list.id === listId) {
+        return {
+          ...list,
+          items: list.items.map((item) => 
+            item.id === itemId 
+              ? { ...item, title: newTitle, description: newDescription }
+              : item
+          ),
+        };
+      }
+      return list;
+    }));
+  }, [setLists]);
+
   const contextValue = useMemo(() => ({
     lists,
     createList,
     deleteList,
     addItemToList,
-    deleteItemFromList
-  }), [lists, createList, deleteList, addItemToList, deleteItemFromList]);
+    deleteItemFromList,
+    editItemInList
+  }), [lists, createList, deleteList, addItemToList, deleteItemFromList, editItemInList]);
 
   return (
     <ListContext.Provider value={contextValue}>
