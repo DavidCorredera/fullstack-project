@@ -1,4 +1,7 @@
-#Proyecto: Top 5 de Todo (Web App)
+### docs/idea.md
+
+Proyecto: Top 5 de Todo (Web App)
+
 💡 Idea del Proyecto
 Top 5 de Todo es una aplicación web minimalista y directa que permite a los usuarios crear, gestionar y visualizar sus rankings personales sobre cualquier temática imaginable (comida, películas, libros, videojuegos, lugares, etc.). La premisa principal y diferenciadora de la aplicación es que todo ranking está estrictamente limitado a un máximo de 5 posiciones (Top 5).
 
