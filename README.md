@@ -99,7 +99,6 @@ Para más información sobre el proceso de construcción, consulta la carpeta [`
 
 ## 🚀 Despliegue
 
-* 🌐 **Frontend:** [Añade el Link a Vercel/Netlify aquí]
-* 🖥️ **Backend:** [Añade el Link a Railway/Render aquí]
+* 🌐 **Vercel:** https://fullstack-project-xi-topaz.vercel.app/
 
 ---

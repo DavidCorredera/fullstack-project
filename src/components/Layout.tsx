@@ -9,9 +9,6 @@ export const Layout = () => {
           <Link to="/" className="text-2xl font-bold tracking-tight hover:text-indigo-200 transition-colors">
             🏆 Top 5 de Todo
           </Link>
-          <span className="text-sm bg-indigo-800 dark:bg-indigo-950 px-3 py-1 rounded-full border border-indigo-500/30">
-            Versión Local
-          </span>
         </div>
       </header>
       
