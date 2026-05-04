@@ -9,6 +9,11 @@ export interface ListContextType {
   addItemToList: (listId: string, item: Omit<Item, 'id'>) => { success: boolean; error?: string };
   deleteItemFromList: (listId: string, itemId: string) => void;
   editItemInList: (listId: string, itemId: string, newTitle: string, newDescription?: string) => void;
+  reorderLists: (oldIndex: number, newIndex: number) => void;
+  reorderItems: (listId: string, oldIndex: number, newIndex: number) => void;
+  updateListCustomColor: (listId: string, color?: string) => void;
+  updateListCustomImage: (listId: string, image?: string) => void;
+  updateItemImage: (listId: string, itemId: string, imageUrl?: string) => void;
 }
 
 export const ListContext = createContext<ListContextType | undefined>(undefined);

@@ -1,14 +1,16 @@
 import { type ReactNode, useCallback, useMemo } from 'react';
 import { ListContext } from './ListContext';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { usePlan } from './PlanProvider';
 import type { TopList, Item } from '../types';
 
 export const ListProvider = ({ children }: { children: ReactNode }) => {
   const [lists, setLists] = useLocalStorage<TopList[]>('top5_lists', []);
+  const { limits } = usePlan();
 
   const createList = useCallback((title: string, category: string) => {
-    if (lists.length >= 10) {
-      return { success: false, error: 'Límite alcanzado: En la versión local solo puedes crear hasta 10 listas.' };
+    if (limits.maxLists > 0 && lists.length >= limits.maxLists) {
+      return { success: false, error: `Límite alcanzado: Tu plan permite hasta ${limits.maxLists} listas.` };
     }
     const newList: TopList = {
       id: crypto.randomUUID(),
@@ -19,7 +21,7 @@ export const ListProvider = ({ children }: { children: ReactNode }) => {
     };
     setLists((prev) => [...prev, newList]);
     return { success: true };
-  }, [lists.length, setLists]);
+  }, [lists.length, setLists, limits.maxLists]);
 
   const deleteList = useCallback((id: string) => {
     setLists((prev) => prev.filter((list) => list.id !== id));
@@ -35,8 +37,9 @@ export const ListProvider = ({ children }: { children: ReactNode }) => {
         return prevLists;
       }
       const targetList = prevLists[listIndex];
-      if (targetList.items.length >= 5) {
-        errorMsg = '¡Top 5 completado! No puedes añadir más elementos.';
+      const maxItems = limits.maxItems > 0 ? limits.maxItems : Infinity;
+      if (targetList.items.length >= maxItems) {
+        errorMsg = `¡Límite alcanzado! Tu plan permite hasta ${maxItems} elementos por lista.`;
         return prevLists;
       }
       const newItem: Item = {
@@ -52,7 +55,7 @@ export const ListProvider = ({ children }: { children: ReactNode }) => {
     });
 
     return errorMsg ? { success: false, error: errorMsg } : { success: true };
-  }, [setLists]);
+  }, [setLists, limits.maxItems]);
 
   const deleteItemFromList = useCallback((listId: string, itemId: string) => {
     setLists((prevLists) => prevLists.map((list) => {
@@ -66,7 +69,6 @@ export const ListProvider = ({ children }: { children: ReactNode }) => {
     }));
   }, [setLists]);
 
-  // Nueva función para editar
   const editItemInList = useCallback((listId: string, itemId: string, newTitle: string, newDescription?: string) => {
     setLists((prevLists) => prevLists.map((list) => {
       if (list.id === listId) {
@@ -83,14 +85,72 @@ export const ListProvider = ({ children }: { children: ReactNode }) => {
     }));
   }, [setLists]);
 
+  const reorderLists = useCallback((oldIndex: number, newIndex: number) => {
+    setLists((prev) => {
+      const newLists = [...prev];
+      const [removed] = newLists.splice(oldIndex, 1);
+      newLists.splice(newIndex, 0, removed);
+      return newLists;
+    });
+  }, [setLists]);
+
+  const reorderItems = useCallback((listId: string, oldIndex: number, newIndex: number) => {
+    setLists((prevLists) => prevLists.map((list) => {
+      if (list.id === listId) {
+        const newItems = [...list.items];
+        const [removed] = newItems.splice(oldIndex, 1);
+        newItems.splice(newIndex, 0, removed);
+        return { ...list, items: newItems };
+      }
+      return list;
+    }));
+  }, [setLists]);
+
+  const updateListCustomColor = useCallback((listId: string, color?: string) => {
+    setLists((prevLists) => prevLists.map((list) => {
+      if (list.id === listId) {
+        return { ...list, customColor: color };
+      }
+      return list;
+    }));
+  }, [setLists]);
+
+  const updateListCustomImage = useCallback((listId: string, image?: string) => {
+    setLists((prevLists) => prevLists.map((list) => {
+      if (list.id === listId) {
+        return { ...list, customImage: image };
+      }
+      return list;
+    }));
+  }, [setLists]);
+
+  const updateItemImage = useCallback((listId: string, itemId: string, imageUrl?: string) => {
+    setLists((prevLists) => prevLists.map((list) => {
+      if (list.id === listId) {
+        return {
+          ...list,
+          items: list.items.map((item) =>
+            item.id === itemId ? { ...item, imageUrl } : item
+          ),
+        };
+      }
+      return list;
+    }));
+  }, [setLists]);
+
   const contextValue = useMemo(() => ({
     lists,
     createList,
     deleteList,
     addItemToList,
     deleteItemFromList,
-    editItemInList
-  }), [lists, createList, deleteList, addItemToList, deleteItemFromList, editItemInList]);
+    editItemInList,
+    reorderLists,
+    reorderItems,
+    updateListCustomColor,
+    updateListCustomImage,
+    updateItemImage
+  }), [lists, createList, deleteList, addItemToList, deleteItemFromList, editItemInList, reorderLists, reorderItems, updateListCustomColor, updateListCustomImage, updateItemImage]);
 
   return (
     <ListContext.Provider value={contextValue}>
