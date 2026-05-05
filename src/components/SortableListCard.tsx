@@ -65,44 +65,46 @@ export const SortableListCard = ({ list, index, onDelete }: ListCardProps) => {
       <h3>{list.title}</h3>
       
       <div className="list-card-footer">
-        <span className="item-count-small">
-          {list.items.length}/{maxItems === Infinity ? '∞' : maxItems} elementos
-        </span>
-        {isFull && <span className="complete-badge-small">✓ Completado</span>}
-      </div>
+        <div className="footer-left">
+          <span className="item-count-small">
+            {list.items.length}/{maxItems === Infinity ? '∞' : maxItems} elementos
+          </span>
+          {isFull && <span className="complete-badge-small">✓ Completado</span>}
+        </div>
 
-      <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
-        <Link 
-          to={`/list/${list.id}`}
-          className="contrast button"
-          style={{ flex: 1, textAlign: 'center', minWidth: '80px' }}
-        >
-          Ver Top 5
-        </Link>
-        {limits.customImages && (
+        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+          <Link 
+            to={`/list/${list.id}`}
+            className="contrast button"
+            style={{ flex: 1, textAlign: 'center', minWidth: '80px' }}
+          >
+            Ver Top 5
+          </Link>
+          {limits.customImages && (
+            <button 
+              onClick={(e) => {
+                e.stopPropagation();
+                fileInputRef.current?.click();
+              }}
+              onPointerDown={(e) => e.stopPropagation()}
+              className="secondary outline"
+              aria-label="Subir imagen"
+            >
+              📷
+            </button>
+          )}
           <button 
             onClick={(e) => {
               e.stopPropagation();
-              fileInputRef.current?.click();
+              onDelete(list.id);
             }}
+            className="delete-btn secondary outline"
+            aria-label="Eliminar lista"
             onPointerDown={(e) => e.stopPropagation()}
-            className="secondary outline"
-            aria-label="Subir imagen"
           >
-            📷
+            ✕
           </button>
-        )}
-        <button 
-          onClick={(e) => {
-            e.stopPropagation();
-            onDelete(list.id);
-          }}
-          className="delete-btn secondary outline"
-          aria-label="Eliminar lista"
-          onPointerDown={(e) => e.stopPropagation()}
-        >
-          ✕
-        </button>
+        </div>
       </div>
       
       <input

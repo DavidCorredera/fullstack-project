@@ -68,7 +68,7 @@ export const Plans = () => {
             key={planType}
             className={`plan-card ${plan === planType ? 'current-plan' : ''}`}
           >
-            {planType === 'ultimate' && <span className="plan-badge-recommended">Más popular</span>}
+            {planType === 'premium' && <span className="plan-badge-recommended">Más popular</span>}
             <h3>{PLAN_INFO[planType].name}</h3>
             <p className="plan-price">{PLAN_INFO[planType].price}</p>
             <p className="plan-description">{PLAN_INFO[planType].description}</p>

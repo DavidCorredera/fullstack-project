@@ -1,5 +1,10 @@
 # 🏆 Top 5
 
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+
 Una aplicación web moderna para crear, organizar y compartir tus listas de favoritos con un diseño minimalista y profesional.
 
 ## ✨ Características
@@ -104,6 +109,7 @@ src/
 
 MIT
 
----
-
-Hecho con ❤️ para organizar el caos de tus favoritos.
+## 🚀 Despliegue
+ * 🌐 **Vercel:** https://fullstack-project-xi-topaz.vercel.app/
+ 
+  **[Ver Tablero de Trello](https://trello.com/b/AcdH9p3E/fullstack-project)**

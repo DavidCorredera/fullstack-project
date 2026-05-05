@@ -16,11 +16,13 @@ export const Layout = () => {
       <header>
         <div className="header-inner">
           <Link to="/" className="logo">
-            <strong>🏆 Top 5</strong>
+            <span className="logo-icon">🏆</span>
+            <strong>Top 5</strong>
           </Link>
           <nav className="header-nav">
-            <Link to="/">Mis Listas</Link>
-            <Link to="/planes" className="plan-badge">
+            <Link to="/" className="nav-link">Mis Listas</Link>
+            <Link to="/planes" className={`plan-badge plan-${plan}`}>
+              <span className="plan-dot"></span>
               {PLAN_NAMES[plan]}
             </Link>
           </nav>
@@ -32,7 +34,37 @@ export const Layout = () => {
       </main>
       
       <footer>
-        <small>Hecho con ❤️ para organizar tus favoritos</small>
+        <div className="footer-container">
+          <div className="footer-main">
+            <div className="footer-description">
+              <div className="footer-brand">
+                <span>🏆</span>
+                <strong>Top 5</strong>
+              </div>
+              <p>La mejor manera de organizar y compartir tus rankings favoritos. Crea tus Top 5 personalizados con estilo.</p>
+            </div>
+            
+            <div className="footer-links">
+              <div className="footer-section">
+                <h4>Planes</h4>
+                <Link to="/planes">Ver planes</Link>
+                <span className="current-plan-text">Plan actual: {PLAN_NAMES[plan]}</span>
+              </div>
+              <div className="footer-section">
+                <h4>Tus Listas</h4>
+                <Link to="/">Ver todas</Link>
+                <Link to="/">Crear nueva</Link>
+              </div>
+            </div>
+          </div>
+          
+          <div className="footer-divider"></div>
+          
+          <div className="footer-bottom">
+            <span>© 2026 Top 5. Todos los derechos reservados.</span>
+            <span className="footer-made">Hecho con ♥ para ayudarte a organizar tus rankings</span>
+          </div>
+        </div>
       </footer>
     </div>
   );
