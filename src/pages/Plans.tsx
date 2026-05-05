@@ -134,7 +134,6 @@ export const Plans = () => {
 
       <div className="plans-grid">
         {(Object.keys(PLAN_INFO) as PlanType[]).map((planType) => {
-          const currentFeatures = PLAN_INFO[planType].features;
 
           return (
             <article
