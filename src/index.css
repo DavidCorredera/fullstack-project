@@ -121,9 +121,34 @@ main {
 .slide-up { animation: slideUp 0.5s ease forwards; }
 .scale-in { animation: scaleIn 0.3s ease forwards; }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 /* Elementos de la App */
 .form-section {
@@ -161,7 +186,11 @@ main {
 
 .top-item:hover {
   border-color: var(--pico-primary);
-  background: linear-gradient(135deg, #ffffff, rgba(37, 99, 235, 0.05));
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    rgba(37, 99, 235, 0.05)
+  );
 }
 
 .top-rank {
@@ -231,18 +260,165 @@ main {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* ========================= */
+/* PLANES */
+/* ========================= */
+
 .plan-card {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
   padding: 2rem;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   background: #ffffff;
   border: 1px solid var(--pico-card-border-color);
-  text-align: center;
+
   transition: all 0.3s ease;
+}
+
+.plan-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--pico-primary);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.08);
 }
 
 .plan-card.current-plan {
   border-color: var(--pico-primary);
-  background: linear-gradient(135deg, #ffffff, rgba(37, 99, 235, 0.05));
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    rgba(37, 99, 235, 0.04)
+  );
+}
+
+/* BADGE NUEVO */
+
+.plan-badge-recommended {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.45rem 0.85rem;
+
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #2563eb, #8b5cf6);
+
+  color: white;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+
+  z-index: 5;
+}
+
+.plan-price {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #2563eb;
+  margin: 1rem 0 0.35rem;
+}
+
+.plan-description {
+  color: #6b7280;
+  font-size: 0.92rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+
+/* FEATURES */
+
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  flex: 1;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  padding: 0.8rem 0;
+
+  font-size: 0.95rem;
+  line-height: 1.4;
+
+  border-bottom: 1px solid var(--pico-muted-border);
+
+  color: #111827;
+}
+
+.plan-features li:last-child {
+  border-bottom: none;
+}
+
+/* ICONOS */
+
+.plan-features .check {
+  width: 20px;
+  min-width: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* FEATURES ACTIVAS */
+
+.feature-enabled .check {
+  color: #16a34a;
+}
+
+/* FEATURES DESACTIVADAS */
+
+.feature-disabled {
+  color: #c0c7d1 !important;
+}
+
+.feature-disabled .check {
+  color: #d1d5db !important;
+}
+
+/* TITULOS DENTRO DE FEATURES */
+
+.plan-feature-section {
+  margin-top: 1.25rem;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: #9ca3af;
+
+  border-bottom: none !important;
+  padding-bottom: 0.35rem !important;
+}
+
+/* BOTONES */
+
+.plan-card button {
+  margin-top: 1.75rem;
 }
 
 /* Modal Overlay FULL SCREEN */
@@ -338,7 +514,8 @@ footer {
   color: #9ca3af;
 }
 
-.footer-section a, .footer-section span {
+.footer-section a,
+.footer-section span {
   color: #d1d5db;
   text-decoration: none;
   font-size: 0.9rem;
@@ -361,6 +538,7 @@ footer {
 }
 
 /* ELEMENTOS ESPECIFICOS */
+
 .top-item-content {
   flex: 1;
   min-width: 0;
@@ -420,9 +598,15 @@ footer {
   .list-header { flex-direction: column; }
   .footer-main { flex-direction: column; }
   .grid-lists { grid-template-columns: 1fr; }
+
+  .plan-badge-recommended {
+    right: -48px;
+    font-size: 0.65rem;
+  }
 }
 
 /* REGLAS AGRESIVAS PARA INPUTS BLANCOS */
+
 html[data-theme="light"] input[type="text"],
 html[data-theme="light"] input[type="url"],
 html[data-theme="light"] textarea,
@@ -464,7 +648,11 @@ select {
   padding: 2.5rem;
   text-align: center;
   border-radius: 0.75rem;
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.03));
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.1),
+    rgba(34, 197, 94, 0.03)
+  );
   border: 1px solid rgba(34, 197, 94, 0.25);
   margin-top: 1.5rem;
 }
@@ -497,7 +685,12 @@ article:hover .delete-btn {
 .not-found h1 {
   font-size: 7rem;
   margin: 0;
-  background: linear-gradient(135deg, var(--pico-primary), #8b5cf6);
+  background: linear-gradient(
+    135deg,
+    var(--pico-primary),
+    #8b5cf6
+  );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -519,37 +712,6 @@ article:hover .delete-btn {
 .current-limits p {
   color: #6b7280;
   margin: 0.25rem 0;
-}
-
-.plan-price {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #2563eb;
-  margin: 1rem 0 0.5rem;
-}
-
-.plan-description {
-  color: #6b7280;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-.plan-features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1.5rem;
-  text-align: left;
-}
-
-.plan-features li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--pico-muted-border);
-  color: #111827 !important;
-}
-
-.plan-features .check {
-  color: #16a34a;
-  margin-right: 0.5rem;
 }
 
 .back-link {
@@ -687,17 +849,8 @@ article:hover .delete-btn {
   margin-bottom: 2rem;
 }
 
-.plan-badge-recommended {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, #2563eb, #8b5cf6);
-  color: white;
-  padding: 0.35rem 1rem;
-  border-radius: 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
-
-.footer-left { display: flex; flex-direction: column; gap: 0.25rem; }
