@@ -17,7 +17,7 @@ export const Layout = () => {
         <div className="header-inner">
           <Link to="/" className="logo">
             <span className="logo-icon">🏆</span>
-            <strong>Top 5</strong>
+            <strong>TOP 5</strong>
           </Link>
           <nav className="header-nav">
             <Link to="/" className="nav-link">Mis Listas</Link>
@@ -39,7 +39,7 @@ export const Layout = () => {
             <div className="footer-description">
               <div className="footer-brand">
                 <span>🏆</span>
-                <strong>Top 5</strong>
+                <strong>TOP 5</strong>
               </div>
               <p>La mejor manera de organizar y compartir tus rankings favoritos. Crea tus Top 5 personalizados con estilo.</p>
             </div>
