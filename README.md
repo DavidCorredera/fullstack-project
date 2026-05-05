@@ -7,6 +7,11 @@
 
 Una aplicación web moderna para crear, organizar y compartir tus listas de favoritos con un diseño minimalista y profesional.
 
+ **[Ver Tablero de Trello](https://trello.com/b/AcdH9p3E/fullstack-project)**
+
+## 🚀 Despliegue
+ * 🌐 **Vercel:** https://fullstack-project-xi-topaz.vercel.app/
+
 ## ✨ Características
 
 - **Creación de listas ilimitadas** (según plan) para organizar tus Top 5 favoritos
@@ -20,7 +25,7 @@ Una aplicación web moderna para crear, organizar y compartir tus listas de favo
 - **Totalmente responsive** - funciona en móvil, tablet y desktop
 - **Almacenamiento local** - tus datos se guardan en tu navegador
 
-## 🚀 Tecnologías
+## 🚀 Detalles de las tecnologías utilizadas
 
 - **React 19** - Biblioteca de UI moderna
 - **TypeScript** - Tipado estático para mayor robustez
@@ -108,8 +113,3 @@ src/
 ## 📄 Licencia
 
 MIT
-
-## 🚀 Despliegue
- * 🌐 **Vercel:** https://fullstack-project-xi-topaz.vercel.app/
- 
-  **[Ver Tablero de Trello](https://trello.com/b/AcdH9p3E/fullstack-project)**
